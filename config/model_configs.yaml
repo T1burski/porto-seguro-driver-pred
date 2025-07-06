@@ -1,0 +1,52 @@
+lightgbm_params:
+  objective: "binary"
+  eval_metric: "average_precision"
+  boosting_type: "gbdt"
+  random_state: 42
+  n_jobs: -1
+  verbosity: -1
+
+  search_space:
+    num_leaves:
+      low: 20
+      high: 200
+      step: 5
+    n_estimators:
+      low: 50
+      high: 350
+      step: 50
+    max_depth:
+      low: 3
+      high: 12
+    learning_rate:
+      low: 0.01
+      high: 0.3
+      log: True
+    min_child_samples:
+      low: 5
+      high: 200
+    colsample_bytree:
+      low: 0.3
+      high: 1.0
+    subsample:
+      low: 0.6
+      high: 1.0
+    reg_alpha:
+      low: 0.00001
+      high: 1
+      log: True
+    reg_lambda:
+      low: 0.00001
+      high: 1
+      log: True
+    scale_pos_weight:
+      choices: ["balanced"]
+
+optuna_settings:
+  n_trials: 100
+  timeout: 3600
+  direction: "maximize"
+  cv_folds: 3
+  early_stopping_rounds: 20
+  verbosity: "minimal"
+  log_every_n_trials: 20
